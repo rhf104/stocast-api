@@ -1,4 +1,6 @@
-# Stocast
+<img src="https://i.imgur.com/zwNxr3T.png" width="200" height="200"/>
+
+# Stocast API
 
 The Stocast API provides a feed of stochastic content generated from [Project Gutenberg][gutenberg] texts.
 
