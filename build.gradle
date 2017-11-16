@@ -1,0 +1,58 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'com.google.cloud.tools.appengine'
+
+buildscript {    // Configuration for building
+    repositories {
+        jcenter()    // Bintray's repository - a fast Maven Central mirror & more
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:+'    // latest App Engine Gradle tasks
+    }
+}
+
+repositories {   // repositories for Jar's you access in your code
+    maven {
+        url 'https://maven-central.storage.googleapis.com'             // Google's mirror of Maven Central
+    }
+    jcenter()
+    mavenCentral()
+}
+
+ext.appEngineVersion = '1.9.56'
+ext.jerseyVersion = '2.25.1'
+
+dependencies {
+    compile "com.google.appengine:appengine:$appEngineVersion"
+    testCompile "com.google.appengine:appengine-testing:$appEngineVersion"
+    testCompile "com.google.appengine:appengine-api-labs:$appEngineVersion"
+    testCompile "com.google.appengine:appengine-api-stubs:$appEngineVersion"
+
+    // Last version of Jersey that supports servlet spec 2.5; Objectify needs 2.5
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: "$jerseyVersion"
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: "$jerseyVersion"
+    compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: "$jerseyVersion"
+
+    compile group: 'io.swagger', name: 'swagger-jersey2-jaxrs', version: '1.5.12'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.9.1'
+
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+    compile "com.google.appengine:appengine-api-1.0-sdk:$appEngineVersion"
+}
+
+appengine {  // App Engine tasks configuration
+    deploy {   // deploy configuration
+        stopPreviousVersion = true  // default - stop the current version
+        promote = true              // default - & make this the current version
+    }
+}
+
+group = 'api.stocast'   // Generated output GroupId
+version = '1.0-SNAPSHOT'          // Version in generated output
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8

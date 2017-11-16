@@ -13,6 +13,7 @@ log.txt
 
 .idea/
 .tmp/
+.gradle/
 .versions/
 coverage/
 www/
