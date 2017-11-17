@@ -30,6 +30,8 @@ dependencies {
     testCompile "com.google.appengine:appengine-api-labs:$appEngineVersion"
     testCompile "com.google.appengine:appengine-api-stubs:$appEngineVersion"
 
+    compile 'com.googlecode.objectify:objectify:5.1.21'
+
     // Last version of Jersey that supports servlet spec 2.5; Objectify needs 2.5
     compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet-core', version: "$jerseyVersion"
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: "$jerseyVersion"
@@ -42,6 +44,7 @@ dependencies {
     providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
 
     compile "com.google.appengine:appengine-api-1.0-sdk:$appEngineVersion"
+    compile group: 'com.google.inject', name: 'guice', version: '4.1.0'
 }
 
 appengine {  // App Engine tasks configuration
