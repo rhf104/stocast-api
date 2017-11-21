@@ -11,10 +11,12 @@ import java.util.List;
 public class StatusService {
 
     private final StatusDao statusDao;
+    private final StatusGeneratorService statusGenerator;
 
     @Inject
-    public StatusService(StatusDao statusDao) {
+    public StatusService(StatusDao statusDao, StatusGeneratorService statusGeneratorService) {
         this.statusDao = statusDao;
+        this.statusGenerator = statusGeneratorService;
     }
 
     public void saveStatus(Status status) {
@@ -22,6 +24,6 @@ public class StatusService {
     }
 
     public List<Status> readStatuses() {
-        return Collections.singletonList(new Status());
+        return Collections.singletonList(statusGenerator.generateStatus());
     }
 }
