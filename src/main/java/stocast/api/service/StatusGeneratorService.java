@@ -2,9 +2,9 @@ package stocast.api.service;
 
 import stocast.api.dao.StatusDao;
 import stocast.api.model.Status;
+import stocast.api.model.WordCache;
 
 import javax.inject.Inject;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static stocast.api.util.Corpora.CORPORA;
@@ -12,17 +12,18 @@ import static stocast.api.util.Corpora.CORPORA;
 public class StatusGeneratorService {
 
     private final StatusDao statusDao;
-    private final MarkovService markovService;
 
     @Inject
-    public StatusGeneratorService(StatusDao statusDao, MarkovService markovService) {
+    public StatusGeneratorService(StatusDao statusDao) {
         this.statusDao = statusDao;
-        this.markovService = markovService;
     }
 
-    public Status generateStatus() {
-        List<String> res = MarkovService.parseCorpus(getRandomCorpus());
-        return new Status();
+    Status generateStatus() {
+        Status status = new Status();
+        WordCache wordCache = new WordCache();
+        wordCache.addCorpus(getRandomCorpus());
+        status.text = wordCache.generateStatus();
+        return status;
     }
 
     private static String getRandomCorpus() {
