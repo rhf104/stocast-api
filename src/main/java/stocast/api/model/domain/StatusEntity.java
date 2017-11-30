@@ -5,4 +5,7 @@ import com.googlecode.objectify.annotation.Entity;
 @Entity
 public class StatusEntity extends AbstractEntity {
 
+    public StatusEntity() {
+
+    }
 }

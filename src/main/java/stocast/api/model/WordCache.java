@@ -1,5 +1,6 @@
 package stocast.api.model;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -9,12 +10,14 @@ import java.util.stream.Stream;
  * Java implementation inspired by:
  * https://github.com/notoriaga/twitter-markov-chain/blob/master/src/wordCache.js
  */
-public class WordCache {
+public class WordCache implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private static final String START = "_START";
     private static final String END = "_END";
 
-    private class Word {
+    private class Word implements Serializable {
 
         int count;
         Map<String, Integer> nextWords;
@@ -37,7 +40,7 @@ public class WordCache {
         }
     }
 
-    private class WordStats {
+    private class WordStats implements Serializable {
         String nextWord;
         int frequency;
         float weight;
@@ -57,6 +60,12 @@ public class WordCache {
 
     public WordCache() {
         this.cache = new HashMap<>();
+    }
+
+    public static WordCache of(String text) {
+        WordCache wc = new WordCache();
+        wc.addCorpus(text);
+        return wc;
     }
 
     private static List<String> parseSentence(String sentence) {

@@ -4,26 +4,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import stocast.api.model.domain.AuthorEntity;
 
 @JsonInclude(Include.NON_NULL)
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public class Status {
+public class Author {
 
-    public Status() {
-        author = new Author();
+    public Author() {
+
     }
 
-    public Status(String text) {
-        this.text = text;
-        this.author = new Author();
+    public Author(AuthorEntity authorEntity) {
+
     }
 
     @JsonProperty
-    public String id = "23123";
+    public String id = "242424233";
 
     @JsonProperty
-    public String text;
+    public String name = "Oscar Wilde";
 
+    @JsonProperty
+    public String years = "1854-1900";
 
-    public Author author;
+    @JsonProperty
+    public boolean following = true;
 }

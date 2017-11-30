@@ -6,8 +6,8 @@ import static stocast.api.service.ObjectifyService.ofy;
 
 public abstract class ObjectifyDao<T> {
 
-    public void save(final T object) {
-        ofy().save().entity(object).now();
+    public Long save(final T object) {
+        return ofy().save().entity(object).now().getId();
     }
 
     public void delete(final T object) {
