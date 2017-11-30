@@ -24,6 +24,6 @@ You can resolve the Stocast API's dependencies using the [Gradle build tool][gra
 - [Stocast Frontend][frontend]
 
 [gutenberg]: https://www.gutenberg.org
-[demo]: https://stocast.appspot.com
+[demo]: https://sto-cast.appspot.com
 [gradle]: https://gradle.org
 [frontend]: https://github.com/rhf104/stocast
